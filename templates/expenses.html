@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">Expenses Catalog</h2>
+<div class="card p-4 shadow-sm border-0 mb-5">
+    <form method="POST" class="row">
+        <div class="col-md-5 mb-3">
+            <label class="form-label text-muted">Expense Item / Vendor</label>
+            <input type="text" name="item_name" class="form-control" placeholder="e.g., Coffee Beans (50lbs)" required>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label class="form-label text-muted">Cost ($)</label>
+            <input type="number" step="0.01" name="cost" class="form-control" required>
+        </div>
+        <div class="col-md-3 d-flex align-items-end mb-3">
+            <button type="submit" class="btn btn-danger w-100">Log Expense</button>
+        </div>
+    </form>
+</div>
+<table class="table bg-white shadow-sm border-0">
+    <thead class="table-dark">
+        <tr><th>Date</th><th>Item</th><th>Cost</th></tr>
+    </thead>
+    <tbody>
+        {% for e in expenses %}
+        <tr>
+            <td>{{ e.date.strftime('%Y-%m-%d') }}</td>
+            <td>{{ e.item_name }}</td>
+            <td class="text-danger">-${{ "%.2f"|format(e.cost) }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

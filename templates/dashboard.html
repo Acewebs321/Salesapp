@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2 class="mb-4">Performance Dashboard</h2>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card p-3 shadow-sm border-0">
+            <h4 class="text-secondary">Sales per Day</h4>
+            <ul class="list-group list-group-flush mt-2">
+                {% for day, total in daily %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ day }} <span class="badge bg-primary rounded-pill">${{ "%.2f"|format(total) }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card p-3 shadow-sm border-0">
+            <h4 class="text-secondary">Sales per Month</h4>
+            <ul class="list-group list-group-flush mt-2">
+                {% for month, total in monthly %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ month }} <span class="badge bg-success rounded-pill">${{ "%.2f"|format(total) }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card p-3 shadow-sm border-0">
+            <h4 class="text-secondary">Top Selling Products</h4>
+            <ul class="list-group list-group-flush mt-2">
+                {% for name, qty in top_products %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ name }} <span class="badge bg-warning text-dark rounded-pill">{{ qty }} sold</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
